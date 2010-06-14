@@ -153,7 +153,7 @@ function logintoboggan_form_alter(&$form, $form_state, $form_id) {
 
     case 'user_profile_form':
       $form['#validate'][] = 'logintoboggan_user_edit_validate';
-      $account = user_load(array('uid' => arg(1)));
+      $account = $form['_account']['#value'];
       $id = logintoboggan_validating_id();
       $pre_auth = !variable_get('user_email_verification', TRUE) && $id != DRUPAL_AUTHENTICATED_RID;
       $in_pre_auth_role = in_array($id, array_keys($account->roles));
