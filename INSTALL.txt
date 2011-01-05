@@ -6,7 +6,7 @@ $Id$
 
 INSTALLATION:
 
-Place entire loggintoboggan module folder into
+Place entire logintoboggan module folder into
   (a) your sites/all/modules directory
   (b) your sites/[my site]/modules directory.
 
