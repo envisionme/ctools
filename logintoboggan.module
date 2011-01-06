@@ -1019,6 +1019,7 @@ function _logintoboggan_process_validation($account) {
     $edit = array();
     $account->logintoboggan_email_validated = TRUE;
     user_module_invoke('update', $edit, $account);
+    user_module_invoke('after_update', $edit, $account);
   }
 }
 
