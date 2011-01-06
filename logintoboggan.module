@@ -267,10 +267,9 @@ function logintoboggan_form_alter(&$form, $form_state, $form_id) {
             $form['mail']['#weight'] = -29;
           }
         }
-        if ($pass) {
-          $min_pass = variable_get('logintoboggan_minimum_password_length', 0);
-          $length = $min_pass ? t('between !min and', array('!min' => $min_pass)) : t('no more than');
-          $description = t('Please choose a password for your account; it must be !length 30 characters.', array('!length' => $length));
+        $min_pass = variable_get('logintoboggan_minimum_password_length', 0);
+        if ($pass && $min_pass > 0) {
+          $description = t('Please choose a password for your account; it must be at least %length characters.', array('%length' => $min_pass));
           if (isset($form['account'])) {
             $form['account']['pass']['#description'] = $description;
           }
@@ -923,8 +922,8 @@ function logintoboggan_validate_email_access($account, $timestamp) {
 }
 
 /**
- * Menu callback; process validate the e-mail address as a one time URL,
- * and redirects to the user page on success.
+ * Menu callback; validate the e-mail address as a one time URL, and redirects
+ * to the user page on success.
  */
 function logintoboggan_validate_email($account, $timestamp, $hashed_pass, $action = 'login') {
   global $user;
