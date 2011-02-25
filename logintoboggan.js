@@ -1,4 +1,3 @@
-// $Id$
 Drupal.behaviors.LoginToboggan = function (context) {
   $("#toboggan-login:not(.toboggan-login-processed)", context).each(
     function() {
