@@ -82,7 +82,7 @@ function logintoboggan_help($path, $arg) {
       else {
         $help_text = '';
       }
-      $output = t("<p>Customize your login and registration system. $help_text</p>");
+      $output = "<p>" . t("Customize your login and registration system.") . " $help_text</p>";
 
       return $output;
   }
@@ -1352,7 +1352,7 @@ function theme_lt_username_description($form_id) {
       return t('You may login with either your assigned username or your e-mail address.');
       break;
     case 'user_login_block':
-      return t('');
+      return '';
       break;
   }
 }
@@ -1379,7 +1379,7 @@ function theme_lt_password_description($form_id) {
 
     case 'user_login_block':
       // If showing the login form in a block, don't print any descriptive text.
-      return t('');
+      return '';
       break;
   }
 }
