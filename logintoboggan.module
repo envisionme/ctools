@@ -1313,6 +1313,33 @@ function logintoboggan_mail($key, &$message, $params) {
 }
 
 /**
+ * Implementation of hook_services_resources_alter().
+ */
+function logintoboggan_services_resources_alter(&$resources, $endpoint) {
+  // Override the normal user login callback.
+  if (isset($resources['user']['actions']['login']['callback'])) {
+    $resources['user']['actions']['login']['callback'] = 'logintoboggan_services_login';
+  }
+}
+
+/**
+ * Replacement callback for the Services user login action.
+ *
+ * Optionally use the email address to login.
+ *
+ * @see _user_resource_login().
+ */
+function logintoboggan_services_login($username, $password) {
+  if (variable_get('logintoboggan_login_with_email', 0)) {
+    $name = db_result(db_query("SELECT name FROM {users} WHERE LOWER(mail) = LOWER('%s')", $username));
+    if (!empty($name)) {
+      $username = $name;
+    }
+  }
+  return _user_resource_login($username, $password);
+}
+
+/**
  *
  * THEME FUNCTIONS!
  *
